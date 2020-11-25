@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: security
+    name: security
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: security
+    spec:
+      containers:
+      - image: nginx
+        name: sec1
+        command:
+          - /bin/sh
+          - -c
+          - sleep 10s
+        volumeMounts:
+          - name: share
+            mountPath: /tmp/share
+        env:
+          - name: JAVA_TOOL_OPTIONS
+            valueFrom:
+              secretKeyRef:
+                name: ${CREDENTIAL_001}
+                key: CREDENTIAL_001
+                name: ${CREDENTIAL_002}
+                key: CREDENTIAL_002
+                name: ${CREDENTIAL_003}
+                key: CREDENTIAL_003
+                name: ${CREDENTIAL_004}
+                key: CREDENTIAL_004
+                name: ${CREDENTIAL_005}
+                key: CREDENTIAL_005
+                name: ${CREDENTIAL_006}
+                key: CREDENTIAL_006
+                name: ${CREDENTIAL_007}
+                key: CREDENTIAL_007
+                name: ${SETTING_USE_SEC}
+                key: SETTING_USE_SEC
+                name: ${SETTING_ALLOW_ANON}
+                key: SETTING_ALLOW_ANON
+                name: ${SETTING_PREVENT_ADMIN_LOGIN}
+                key: SETTING_PREVENT_ADMIN_LOGIN
+      - image: nginx
+        name: sec2
+        command:
+            - /bin/sh
+            - -c
+            - sleep 10s
+        volumeMounts:
+            - name: share
+              mountPath: /tmp/share
+      volumes:
+        - name: share
+          emptyDir: {}
+
+parameters:
+  - name: CREDENTIAL_001
+    displayName: Credential_001
+    description: Credential_001
+    value: ""
+    required: true
+  - name: CREDENTIAL_002
+    displayName: Credential_002
+    description: Credential_002
+    value: ""
+    required: true
+  - name: CREDENTIAL_003
+    displayName: Credential_003
+    description: Credential_003
+    value: ""
+    required: true
+  - name: CREDENTIAL_004
+    displayName: Credential_004
+    description: Credential_004
+    value: ""
+    required: true
+  - name: CREDENTIAL_005
+    displayName: Credential_005
+    description: Credential_005
+    value: ""
+    required: true
+  - name: CREDENTIAL_006
+    displayName: Credential_006
+    description: Credential_006
+    value: ""
+    required: true
+  - name: CREDENTIAL_007
+    displayName: Credential_007
+    description: Credential_007
+    value: ""
+    required: true
+  - name: SETTING_USE_SEC
+    displayName: setting_use_sec
+    description: setting_use_sec
+    value: ""
+    required: true
+  - name: SETTING_ALLOW_ANON
+    displayName: setting allow anon
+    description: setting allow anon
+    value: ""
+    required: true
+  - name: SETTING_PREVENT_ADMIN_LOGIN
+    displayName: setting prevent admin login
+    description: etting prevent admin login
+    value: ""
+    required: true
