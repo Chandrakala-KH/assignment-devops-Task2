@@ -1,0 +1,26 @@
+SubTask1:
+  Installed minikube and kubectl locally and configured
+SubTask2:
+  Network policy configured using yaml file.(network_policy.yaml)
+Subtask3:
+  Logged into sec1 and created a file.txt under /tmp/share which is shared volume
+  same permission was shared accross other pod sec2
+SubTask4:
+  All key values are stored in secret.yaml
+  Thease key values available as environment variable in pod
+  Please refer secret.yaml and deployment.yaml files for configurations
+  
+
+
+Responses for yaml execution, you will get below outputs
+
+  kubectl apply -f secret.yaml --validate=false --namespace=default
+  secret/nginx created
+
+
+  kubectl apply -f Network_policy.yaml --validate=false
+  networkpolicy.networking.k8s.io/default created
+
+
+  kubectl apply -f deployment.yaml --validate=false --namespace=default
+  pod/nginx created
