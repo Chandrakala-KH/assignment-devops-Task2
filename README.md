@@ -18,3 +18,8 @@
 #### How to deploy
      Copy all the above files to local desktop where minikube and kubectl is configured.
      execute deploy.sh command
+   
+  Output:
+  secret/nginx created
+  networkpolicy.networking.k8s.io/default created
+  pod/nginx created
