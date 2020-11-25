@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: network-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: nginx
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: nginx
+    ports:
+    - protocol: TCP
+      port: 5764
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: sec1
+    - podSelector:
+        matchLabels:
+          role: sec2
+    ports:
+    - protocol: TCP
+      port: 443
+    - protocol: UDP
+      port: 5764
